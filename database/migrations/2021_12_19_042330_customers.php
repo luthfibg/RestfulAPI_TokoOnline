@@ -13,7 +13,16 @@ class Customers extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('tb_customers', function (Blueprint $b){
+        	$b->id();
+        	$b->string('email', 120)->unique();
+        	$b->string('first_name', 50);
+        	$b->string('last_name', 50)->nullable();
+        	$b->string('city', 100)->nullable();
+        	$b->string('address', 120)->nullable();
+        	$b->string('password', 200);
+        	$b->string('token', 64)->nullable();
+        });
     }
 
     /**
@@ -23,6 +32,6 @@ class Customers extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('tb_customers');
     }
 }
