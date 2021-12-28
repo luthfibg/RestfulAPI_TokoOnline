@@ -1,0 +1,47 @@
+API Doc: Products
+ 
+1. Endpoint	: /products
+2. Method		: GET
+3. Keterangan	: Menampilkan semua data produk
+4. Header		: { content-type : application/json }
+5. Body		: -
+6. Response	:
+
+#Success
+
+{
+	'status'	: 'OK',
+	'data'	: {
+	    'current_page': int, 
+	    [
+	    	{
+		    'id': int, 
+		    'title': text
+		    'category': text
+		    'rate': double
+		    'price': int
+		    'stock': int,
+		    'free_shipping': int
+		}
+	    ],
+	    'next_page': int, 'path': text, 'per_page': int,
+	    'prev_page_url': text, 'to': int, 'total': int
+	}
+	'error': null
+}
+
+
+#Data Kosong
+
+{
+	'status': 'Kosong',
+	'data': []
+	'error': null
+}
+
+***Setelah membaca ini, lanjutkan buat ProductController
+Controller ini akan mengelola operasi yang diperlukan pada endpoint Products. Untuk membuat controller, jalankan di terminal:
+> php artisan make:controller ProductController
+
+Lanjut ke /routes/api.php untuk membuat routes nya
+

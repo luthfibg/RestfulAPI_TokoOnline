@@ -1,0 +1,46 @@
+Pembuatan RESTful API
+ 
+Pembahasan: 
+ 
+    - Kesalahan pembuatan RESTful API
+    - Aturan pembuatan endpoint RESTful API
+    - Tahapan pembuatan RESTful API
+    - API Documentation
+    - Authentication
+    - Endpoint RESTtul API
+
+Kesalahan dalam pembuatan RESTful API:
+
+    1. Menganggap RESTful API sebagai jembatan akses ke basis data
+    2. Membuat semua operasi CRUD tanpa mempertimbangkan kebutuhan
+    3. Menyediakan data seluruh field tanpa mempertimbangkan kebutuhan di sisi client
+    4. Membuat RESTful API dahulu kemudian membuat client
+    5. Membuat endpoint API walau tidak digunakan.
+
+Aturan Pembuatan endpoint RESTful API
+
+    1. Gunakan kata benda, jangan menggunakan kata kerja
+    2. Cukup gunakan 1 nama, namun bedakan operasi dari jenis method
+    3. Buat endpoint sesuai kebutuhan saja
+        Contoh endpoint:
+        https://www.contohapi.com/products/{product_id}
+
+        Empat macam Request di RESTful API:
+             GET		: untuk meminta data
+             POST		: untuk menyimpan data baru
+             PATCH		: untuk mengubah data
+             DELETE		: untuk mengahpus data
+    4. Gunakan konsep hirarki pada endpoint
+        Contoh:
+        https://www.contohapi.com/products/{product_id}/images/
+             1. Penambahan API baru harus dialamat endpoint yang berbeda
+             2. Tidak boleh mengganti struktur response API
+             3. Jangan menghilangkan endpoint yang sudah ada.
+
+Tahapan membuat RESTful API
+    1. Tentukan UI/UX
+    2. Membuat dokumentasi RESTful API
+    3. Membuat RESTful API
+Contoh UI/UX adalah halaman login, yang merupakan proses authentication (Proses identikasi pengguna), misal menggunakan username dan password
+
+***Setelah membaca ini, lanjutkan ke _apidoc_auth.txt

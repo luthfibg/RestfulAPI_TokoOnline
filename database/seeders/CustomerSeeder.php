@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+# [018] Tambahkan beberapa modul dibawah ini, termasuk: use Faker\Factory as DataPalsu.
+# Ini adalah library Faker yang menyediakan data palsu
 use App\Models\Customers;
 use Illuminate\Database\Seeder;
 use Faker\Factory as DataPalsu;
@@ -16,6 +18,11 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
+
+        # [019] Buat perintah sebagai berikut. Yang artinya:
+        # Lakukan perulangan sebanyak 100 kali
+        # Isi data ke variabel data[]
+        # Lakukan insert secara bulk
         $datapalsu = DataPalsu::create('id_ID');
         $data = [];
         for ($i=0; $i < 100; $i++) { 
@@ -32,3 +39,15 @@ class CustomerSeeder extends Seeder
         (new Customers())->insert($data);
     }
 }
+
+/*********************************************************
+[020]
+    Untuk menjalankan perintah Seeder, jalankan perintah di terminal > php artisan db:seed CustomerSeeder
+
+    Perintah tersebut akan melakukan eksekusi class CustomerSeeder untuk mengisi data di tabel customer dengan data dummy
+
+**********************************************************/
+
+# [021] buat class Model Orders, jalankan > php artisan make:model Orders
+
+############################Next to /app/Models/Orders.php

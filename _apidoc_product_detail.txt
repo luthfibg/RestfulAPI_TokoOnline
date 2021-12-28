@@ -1,0 +1,28 @@
+API Doc: Product Detail
+
+1. Endpoint	: /products/{id}
+2. Method		: GET
+3. Keterangan	: Menampilkan data produk berdasarkan id
+4. Header		: { content-type : application/json }
+5. Body		: -
+6. Response	:
+
+# Success (code Http: 200)
+{
+	'status': 'OK',
+	'data': {
+		'id': int,
+		'title': text,
+		'category': text,
+		'rate': double,
+		'price': int,
+		'stock': int,
+		'free_shipping': int
+	},
+	'error': null
+}
+
+# Not Found (Error 404)
+
+***Lanjut ke /routes/api.php
+

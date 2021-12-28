@@ -1,0 +1,44 @@
+API Doc: Authentication
+
+1. Endpoint	: /auth
+2. Method		: GET
+3. Keterangan	: Melakukan Otentikasi user dan password
+4. Header		: { content-type : application/json, Authorization: basic base64encode(email:password) }
+5. Body		: null
+6. Response	: 
+
+#Success
+{
+	"status"	: "OK";
+	"data"	: {
+		"id": 1,
+		"first_name": "text"
+		"last_name": "text"
+		"email": "text"
+		"token": "text"
+	},
+	"error": null
+}
+
+#Failure email
+{
+	'status': 'Gagal',
+	'data': null
+	'error': [
+	    'Pengguna tidak ditemukan'
+	]
+}
+
+#Failure password
+{
+	'status': 'Gagal',
+	'data': null
+	'error': [
+	    'Anda tidak memiliki wewenang'
+	]
+}
+
+***Setelah membaca ini, lanjutkan ke /routes/api.php
+
+
+

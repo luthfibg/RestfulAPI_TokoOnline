@@ -1,5 +1,7 @@
 <?php
 
+
+# [026] Tambahkan modul: use Faker\Factory as Folder
 namespace Database\Seeders;
 
 use App\Models\Products;
@@ -15,6 +17,8 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+
+        # [027] isi method run ini dengan kode berikut
         $fake = Faker::create('id_ID');
 
         $categories = ['Pakaian', 'Gadget', 'Digital'];
@@ -55,3 +59,24 @@ class ProductSeeder extends Seeder
         (new Products())->insert($data);
     }
 }
+
+/****************************************************
+[028]
+    Jalankan perintah di terminal:
+    > php artisan db:seed Product
+
+    untuk menjalankan 
+
+****************************************************/
+
+/*****************************************************
+[029]
+    class Controller Dasar
+
+    Untuk memudahkan pembuatan response restfulAPI, kita harus menyediakan controller dasar (BaseController) sebagai class Induk berisikan method penyeragaman format response. Tujuannya supaya pada penulisan kode program selanjutnya dapat lebih ringkas, tanpa banyak menulis format response yang berulang
+
+    Jalankan perintah di terminal > php artisan make:controller BaseController
+
+******************************************************/
+
+########################Next to /app/Http/Controllers/
