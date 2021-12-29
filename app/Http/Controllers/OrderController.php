@@ -7,9 +7,22 @@ use App\Models\Orders, App\Models\Products, Carbon\Carbon;
 
 class OrderController extends BaseController
 {
+    # [082] Buat constructor
+    public function __construct()
+    {
+        # [083] Tambahkan instruksi penggunaan middleware:
+        $this->middleware('authorization');
+        /*****************************************************
+        [084]
+            Untuk menguji apakah authorization sudah sesuai atau belum, lakukan langkah Authentication seperti pada langkah test sebelumnya. Atribut "token" yang didapat digunakan untuk authorization setiap ingin mendapatkan sumberdaya yang ada di server. Penggunaannya gunakan pada header.
+            Setelah header di set key token, klik Send dan lihat hasilnya. Selanjutnya lakukan pengujian tanpa menyertakan token di header. lihat hasilnya.
+
+        ******************************************************/
+    }
 
     # [052] Buat method store
-    public function store(){
+    public function store()
+    {
     	# [054] cari data produk berdasarkan product_id
     	$product = Products::find( \request('Product_id') );
 
@@ -32,31 +45,32 @@ class OrderController extends BaseController
     	} else {
     		return $this->out(status:'Gagal', error: ['Order gagal disimpan'], code: 504);
     	}
+
+        /*******************************************************************
+        [058]
+            Buka Postman, Silahkan Isikan Body dengan isian misal:
+            customer_id     = 1
+            Product_id      = 22
+            Qty             = 21
+
+            Klik send dan lihat nilai baliknya
+
+            Contoh disini kita tidak memberikan data harga (price).
+            Karena harga diambil langsung dari tabel products.  
+
+        *******************************************************************/
+
+        /******************************************************************
+
+            Selanjutnya, buat operasi Read /orders, pertama buat dulu routesnya
+
+        *******************************************************************/
+        ###########################################Next to /routes/api.php
     }
 
-    /*******************************************************************
-    [058]
-        Buka Postman, Silahkan Isikan Body dengan isian misal:
-        customer_id     = 1
-        Product_id      = 22
-        Qty             = 21
-
-        Klik send dan lihat nilai baliknya
-
-        Contoh disini kita tidak memberikan data harga (price).
-        Karena harga diambil langsung dari tabel products.  
-
-    *******************************************************************/
-
-    /******************************************************************
-
-        Selanjutnya, buat operasi Read /orders, pertama buat dulu routesnya
-
-    *******************************************************************/
-    ###########################################Next to /routes/api.php
-
     # [060] Tambahkan method findAll()
-    public function findAll(){
+    public function findAll()
+    {
 
     	# [061] Buat query join antara table 'Order > Customers > Products'
     	$order 	= Orders::query()
@@ -83,26 +97,26 @@ class OrderController extends BaseController
 
     	# [065] Kirimkan data dengan status OK
     	return $this->out(data:$data, status:'OK');
+
+        /*******************************************************************
+        [066]
+            Buka postman lagi, lakukan testing
+            Method:GET
+            Url: 127.0.0.1:8000/api/orders/?q=pulsa
+            Klik send
+
+            Maka hasilnya akan menampilkan data order yang memiliki produk
+            (products.title) = "pulsa"
+
+        ********************************************************************/
+        ################################# Next to 'routes/api.php' untuk membuat fungsi read
+
+        #################################Jika READ sudah berhasil, buat operasi UPDATE, buat routenya terlebih dahulu, ke routes/api.php
     }
 
-    /*******************************************************************
-    [066]
-        Buka postman lagi, lakukan testing
-        Method:GET
-        Url: 127.0.0.1:8000/api/orders/?q=pulsa
-        Klik send
-
-        Maka hasilnya akan menampilkan data order yang memiliki produk
-        (products.title) = "pulsa"
-
-    ********************************************************************/
-    ################################# Next to 'routes/api.php' untuk membuat fungsi read
-
-    #################################Jika READ sudah berhasil, buat operasi UPDATE, buat routenya terlebih dahulu, ke routes/api.php
-
-
     # [068] Tambahkan method update(), parameter yang digunakan adalah Model Orders, nantinya apabila id order nya benar, maka akan melanjutkan proses didalamnya. Namun bila id order tidak tersedia akan mengembalikan error 404
-    public function update( Order $orders ){
+    public function update( Order $orders )
+    {
 
         # [069] Data order di update berdasarkan variabel yang dikirimkan dari client. Apabila nama field yang dikirim dari client tidak sesuai maka akan terjadi kesalahan error 500
         $product    = Products::find( request('product_id') );
@@ -127,30 +141,31 @@ class OrderController extends BaseController
             error:  $hasil ? null : ['Gagal merubah data'],
             code:   $hasil ? 201 : 504
         );
+
+        /************************************************************************
+        [071]
+            Testing operasi Update /orders
+            Gunakan Postman, misal ganti data order dengan id=2, Maka buat request
+            dengan Method: PATCH.
+            Url: http://127.0.0.1/8000/api/orders/2
+            Pada tab body pilih raw
+            Isikan
+            {
+                "customer_id": 52,
+                "product_id": 12,
+                "qty": 14,
+            }
+
+            Request ini akan meminta perubahan data order yang memiliki id=2, diganti isi customer_id=52, product_id=12, dan qty=14.
+
+            ###########################################Next to /routes/api.php untuk pembuatan router Operasi DELETE.
+
+        ***********************************************************************/
     }
 
-    /*************************************************************************
-    [071]
-        Testing operasi Update /orders
-        Gunakan Postman, misal ganti data order dengan id=2, Maka buat request
-        dengan Method: PATCH.
-        Url: http://127.0.0.1/8000/api/orders/2
-        Pada tab body pilih raw
-        Isikan
-        {
-            "customer_id": 52,
-            "product_id": 12,
-            "qty": 14,
-        }
-
-        Request ini akan meminta perubahan data order yang memiliki id=2, diganti isi customer_id=52, product_id=12, dan qty=14.
-
-        ###########################################Next to /routes/api.php untuk pembuatan router Operasi DELETE.
-
-    *************************************************************************/
-
     # [073] Tambahkan method delete(). Parameter yang digunakan adalah Model Orders, nantinya apabila id order nya benar maka akan melanjutkan proses hapus didalamnya. Namun bila id order tidak tersedia, akan mengembalikan error 404.
-    public function delete( Order $orders ){
+    public function delete( Order $orders )
+    {
         # [074] Data order di delete berdasarkan variabel yang dikirimkan dari client. Apabila nama field yang dikirim dari client tidak sesuai maka akan terjadi kesalahan error 500. Jika proses delete tidak terjadi error exception maka kembalikan dengan status OK bila delete true dan Gagal bila delete false
         $hasil = $order->delete();
         return $this->out(
@@ -159,23 +174,22 @@ class OrderController extends BaseController
             error: $hasil ? null : ['Gagal hapus data'],
             code: $hasil ? 200 : 504,
         );
+
+        /**********************************************************************
+        [074]
+            Testing operasi Delete /orders
+
+            Gunakan Postman, misal ganti data order dengan id=3, Maka buat request
+            dengan Method: DELETE
+            Url: http://127.0.0.1/8000/api/orders/3
+            Klik send
+
+            Request ini akan meminta hapus data order yang memiliki id=3,
+
+            Pastikan saat melakukan testing id order yang akan dihapus memang tersedia di tabel. Apabila id tidak tersedia, maka luarannya berupa halaman 404 (Page not found)
+
+            ###########################################Next to _authorization.txt
+        ***********************************************************************/
     }
-
-    /*************************************************************************
-    [074]
-        Testing operasi Delete /orders
-
-        Gunakan Postman, misal ganti data order dengan id=3, Maka buat request
-        dengan Method: DELETE
-        Url: http://127.0.0.1/8000/api/orders/3
-        Klik send
-
-        Request ini akan meminta hapus data order yang memiliki id=3,
-
-        Pastikan saat melakukan testing id order yang akan dihapus memang tersedia di tabel. Apabila id tidak tersedia, maka luarannya berupa halaman 404 (Page not found)
-
-        ###########################################Next to _authorization.txt
-
-    *************************************************************************/
 }
     

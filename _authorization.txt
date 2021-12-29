@@ -1,0 +1,10 @@
+Authorization (Reading)
+ 
+Authorization adalah suatu proses untuk memastikan apakah client merupakan penggunayang sah untuk mengakses suatu endpoint pada sumber daya yang ada di server. Implementasinya dengan cara menyertakan informasi pada header, misal berupa API_KEY / token / token_key atau istilah lainnya pada sisi client yang kemudian dikirimkan ke sisi server untuk dicocokkan dengan daftar kunci yang sah di sisi server.
+
+Biasanya authorization di lakukan setelah authentication. Setelah melakukan authentication, yaitu mengirim user dan password, maka client akan mendapatkan token dari server. Token yang berasal dari server inilah yang kemudian selalu digunakan client untuk akses sumberdaya yang ada di server, dengan cara selalu menyertakan token di header setiap melakukan request ke server.
+
+Implementasi authorization di Laravel dapat menggunakan fitur Middleware. Middleware merupakan fitur pada laravel yang menyediakan suatu mekanisme untuk filter setiap permintaan HTTP ke aplikasi. Buatlah Middleware melalui terminal dengan mengetikkan perintah:
+> php artisan make:middleware Authorization
+
+***Lanjutkan ke /app/Http/Middleware/Authorization.php

@@ -63,5 +63,12 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+        # [081] Daftarkan middleware authorization disini, Beri nama alias middleware, contohnya authorization
+        'authorization' => \App\Http\Middleware\Authorization::class
+
+        /*Setelah itu, buka file Controllera yang akan diterapkan authorization. Contoh ke OrderController. Jangan sekali-kali menerapkannya ke Controller atau route Authentication, karena akan menyebabkan tidak dapat melakukan authentication*/
+
+        ################################Next to /app/Http/Controllers/OrderController.php
     ];
 }
