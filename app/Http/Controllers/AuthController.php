@@ -8,6 +8,7 @@ use App\Models\Customers;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthController extends BaseController
 {
@@ -29,8 +30,8 @@ class AuthController extends BaseController
     /*********************************************************************/
 
         # [037] Filter data customer berdasarkan email dan password. Ambil field yang dibutuhkan saja, seperti: id, first_name, last_name, dan email
-    	$data		= (new Customer())->newQuery()
-    					->where(['email'=>$mail])
+    	$data		= (new Customers())->newQuery()
+    					->where(['email'=>$email])
     					->get(['id', 'first_name', 'last_name', 'email', 'password'])->first();
 
         # [038] Buat kondisi untuk menentukan output jika data customer terdaftar dan jika data customer tidak terdaftar
@@ -46,11 +47,12 @@ class AuthController extends BaseController
 
             # [040] Cek apakah Hash password dari tabel cocok dengan password yang dikirim oleh client?
     		if (Hash::check($pass, $data->password)) {
+
     			$data->token = hash('sha256', Str::random(10));	//buat token untuk di kirim ke client
     			unset($data->password);	//hilangkan informasi password yang akan dikirim ke client
     			$data->update();	//update token disimpan di tb_customers
 
-    			return $this->out(data: $data, status: 'OK');
+    			return $this->out(data: $data, status: 'OK',);
 
     		}
 

@@ -25,7 +25,7 @@ Route::get('/products', [\App\Http\Controllers\ProductController::class, 'findAl
 
 # [048] Keterangan: route GET/products/{produk:id}
 # {produk} = nama parameter di findOne $produk. Pada implementasinya pemanggilan route ini yaitu: http://alamatserver/api/products/{idproduk}. Contoh: http://127.0.0.1:8000/api/products/20
-Route::get('/products{produk}', [\App\Http\Controllers\ProductController::class, 'findOne']);
+Route::get('/products/{produk}', [\App\Http\Controllers\ProductController::class, 'findOne']);
 ####################################Next to app/Http/Controller/ProductController.php
 
 # [051] Karena operasi CREATE adalah pengiriman data untuk disimpan, maka tambahkan route POST sebagai berikut

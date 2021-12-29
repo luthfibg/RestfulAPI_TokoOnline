@@ -24,7 +24,7 @@ class OrderController extends BaseController
     public function store()
     {
     	# [054] cari data produk berdasarkan product_id
-    	$product = Products::find( \request('Product_id') );
+    	$product = Products::find( \request('product_id') );
 
         # [055] jika data produk tidak ditemukan, kembalikan nilai dengan format produk tidak ditemukan
     	if($product == null){
@@ -74,8 +74,8 @@ class OrderController extends BaseController
 
     	# [061] Buat query join antara table 'Order > Customers > Products'
     	$order 	= Orders::query()
-    				->leftJoin('customer', 'customers.id', '=', 'orders.customer.id')
-    				->leftJoin('products', 'products.id', '=', 'orders.product.id');
+    				->leftJoin('customers', 'customers.id', '=', 'orders.customer_id')
+    				->leftJoin('products', 'products.id', '=', 'orders.product_id');
 
     	# [062] Cek adakah variabel q (query) untuk pencarian tersedia?
         //jika ada query "q" untuk pencarian products.title
