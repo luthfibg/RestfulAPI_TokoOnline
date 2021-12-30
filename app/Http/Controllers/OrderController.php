@@ -72,27 +72,27 @@ class OrderController extends BaseController
     public function findAll()
     {
 
-    	# [061] Buat query join antara table 'Order > Customers > Products'
+    	# [061] Buat query join antara table 'Orders > Customers > Products'
     	$order 	= Orders::query()
-    				->leftJoin('customers', 'customers.id', '=', 'orders.customer_id')
-    				->leftJoin('products', 'products.id', '=', 'orders.product_id');
+    				->leftJoin('tb_customers', 'tb_customers.id', '=', 'tb_orders.customer_id')
+    				->leftJoin('tb_products', 'tb_products.id', '=', 'tb_orders.product_id');
 
-    	# [062] Cek adakah variabel q (query) untuk pencarian tersedia?
+    	# [062] Cek apakah variabel q (query) untuk pencarian tersedia?
         //jika ada query "q" untuk pencarian products.title
     	if ( request()->has('q') ) { 
     		$q = request('q');
 
     		# [063] jika q tersedia maka tambahkan perintah "where" untuk filter data berdasarkan products.title
-    		$order->where('products.title', 'like', "%$q%");
+    		$order->where('tb_products.title', 'like', "%$q%");
     	}
 
     	# [064] Dapatkan data berupa paginate() sebanyak 10 data/halaman
     	$data = $order->paginate(10,
-    				['orders.*', 
-    				'customers.first_name', 
-    				'customers.last_name', 
-    				'customers.address', 'customers.city', 
-    				'products.title as product_title']
+    				['tb_orders.*', 
+    				'tb_customers.first_name', 
+    				'tb_customers.last_name', 
+    				'tb_customers.address', 'tb_customers.city', 
+    				'tb_products.title as product_title']
     	);
 
     	# [065] Kirimkan data dengan status OK
@@ -115,7 +115,7 @@ class OrderController extends BaseController
     }
 
     # [068] Tambahkan method update(), parameter yang digunakan adalah Model Orders, nantinya apabila id order nya benar, maka akan melanjutkan proses didalamnya. Namun bila id order tidak tersedia akan mengembalikan error 404
-    public function update( Order $orders )
+    public function update( Orders $order )
     {
 
         # [069] Data order di update berdasarkan variabel yang dikirimkan dari client. Apabila nama field yang dikirim dari client tidak sesuai maka akan terjadi kesalahan error 500
@@ -164,7 +164,7 @@ class OrderController extends BaseController
     }
 
     # [073] Tambahkan method delete(). Parameter yang digunakan adalah Model Orders, nantinya apabila id order nya benar maka akan melanjutkan proses hapus didalamnya. Namun bila id order tidak tersedia, akan mengembalikan error 404.
-    public function delete( Order $orders )
+    public function delete( Orders $order )
     {
         # [074] Data order di delete berdasarkan variabel yang dikirimkan dari client. Apabila nama field yang dikirim dari client tidak sesuai maka akan terjadi kesalahan error 500. Jika proses delete tidak terjadi error exception maka kembalikan dengan status OK bila delete true dan Gagal bila delete false
         $hasil = $order->delete();
