@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+# [090] Edit isi return view() menjadi 'login'
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
+
+# [091] Buat file login.blade.php di /resources/views/
+###############################Next to /resources/views/login.blade.php

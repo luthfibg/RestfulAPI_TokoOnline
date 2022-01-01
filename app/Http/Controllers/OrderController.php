@@ -17,6 +17,11 @@ class OrderController extends BaseController
             Untuk menguji apakah authorization sudah sesuai atau belum, lakukan langkah Authentication seperti pada langkah test sebelumnya. Atribut "token" yang didapat digunakan untuk authorization setiap ingin mendapatkan sumberdaya yang ada di server. Penggunaannya gunakan pada header.
             Setelah header di set key token, klik Send dan lihat hasilnya. Selanjutnya lakukan pengujian tanpa menyertakan token di header. lihat hasilnya.
 
+            Untuk selanjutnya adalah penerapan Restful API di Web. Next to _RestfulAPI_Web.txt (Reading). Atau
+
+        [085]
+            Buat sebuah view client untuk menggunakan JQuery. Buat file template.blade.php di direktori /resources/views/
+
         ******************************************************/
     }
 

@@ -1,0 +1,12 @@
+ 
+Penggunaan RESTful API di Web
+ 
+1. JQuery & AJAX
+2. Implementasi Authentication Web menggunakan JQuery
+3. Implementasi Authorization Web menggunakan JQuery
+4. Implementasi method GET di JQuery
+5. Implementasi method POST di JQuery
+6. Implementasi method DELETE di JQuery
+7. Implementasi method UPDATE di JQuery
+
+***Setelah membaca, Implementasikan JQuery pada sisi client. Buat file view di direktori /resources/views/ beri nama template.blade.php
